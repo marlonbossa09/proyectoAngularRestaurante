@@ -1,0 +1,23 @@
+.custom-navbar {
+  background-color: orange;
+}
+
+.custom-navbar .navbar-nav .nav-link {
+  color: blue;
+  text-shadow: 3px 3px 5px rgb(2, 2, 17);
+  font-weight: bold;
+  font-size: 19px;
+  transition: color 0.3s ease;
+}
+
+.custom-navbar .navbar-nav .nav-link:hover {
+  color: white;
+}
+.custom-navbar .navbar-toggler-icon {
+  background-image: url('src\assets\img\lista.png'); /* Reemplaza con la ruta correcta a tu imagen */
+  background-size: contain; /* Ajusta según tus necesidades */
+  width: 30px; /* Ajusta el ancho según tus necesidades */
+  height: 30px; /* Ajusta la altura según tus necesidades */
+}
+
+
