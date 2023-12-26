@@ -10,6 +10,7 @@ import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 
+
 @Component({
   selector: 'app-three-scene',
   template: '<div id="three-container"></div>',
@@ -62,10 +63,14 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
   }
 
   private init() {
-    this.camera.position.z = 125;
-    this.camera.scale.set(0.5, 0.5, 0.5);
+    // Dentro del método init()
+    this.camera.position.set(0, 0, 0.5); // Ajusta la posición de la cámara
 
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.camera.fov = 90;
+    this.camera.updateProjectionMatrix();
+    window.addEventListener('resize', this.onWindowResize.bind(this));
+
+    this.renderer.setSize(window.innerWidth * 0.8, window.innerHeight);
 
     document
       .getElementById('three-container')!
@@ -77,6 +82,12 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
     // orbit controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
+  // Configura las limitaciones del zoom
+  this.controls.maxPolarAngle = Math.PI / 2; // Evita que la cámara se voltee hacia arriba
+  this.controls.minPolarAngle = Math.PI / 2; // Evita que la cámara se voltee hacia abajo
+  this.controls.minDistance = 0; // Distancia mínima de acercamiento
+  this.controls.maxDistance = 1;   // Distancia máxima de alejamiento
+  this.controls.enableDamping = true;
     // Raycaster
     document
       .getElementById('three-container')!
@@ -85,10 +96,9 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
       .getElementById('three-container')!
       .addEventListener('click', this.onClickObject.bind(this));
 
-    this.loadGLB('assets/img/colombia.glb').then((gltf2) => {
+    this.loadGLB('assets/img/restaurante.glb').then((gltf2) => {
       const estatua: any = gltf2.scene;
-      estatua.scale.set(20, 20, 20);
-      estatua.position.set(0, 0, 100);
+      estatua.position.set(0, 0, 0);
 
       // Imprime las animaciones disponibles
       console.log(gltf2.animations);
@@ -103,22 +113,13 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
       this.scene.add(estatua);
     });
 
-    const planeGeometry = new THREE.PlaneGeometry(
-      window.innerWidth,
-      window.innerHeight
-    );
-
-    const planeMaterial = new THREE.MeshBasicMaterial({
-      color: 0x000000,
-      transparent: true,
-      opacity: 0.5, // Ajusta la opacidad
-    });
-
-    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.position.set(0, 0, 50); // Ajusta la posición del plano según tu escena
-    this.scene.add(plane);
-
     this.loadSkyboxHDR();
+  }
+
+  private onWindowResize() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
   private onPointerMove(event: MouseEvent) {
@@ -144,22 +145,16 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
       const animateFn = () => {
         requestAnimationFrame(animateFn);
 
-        // Puedes omitir esta parte para que no restaure la opacidad gradualmente
-        /*
-        this.scene.children.forEach((object) => {
-          if (object instanceof THREE.Mesh) {
-            object.material.opacity -= 0.01;
-            if (object.material.opacity < 0) object.material.opacity = 0;
-          }
-        });
-        */
-
         if (this.mixer) {
           const delta = this.clock.getDelta();
           this.mixer.update(delta);
         }
 
-        this.controls.update();
+        // Verifica si controls está definido antes de llamar a update
+        if (this.controls) {
+          this.controls.update();
+        }
+
         this.renderer.render(this.scene, this.camera);
       };
 

@@ -20,6 +20,7 @@
     "@angular/router": "^16.0.0",
     "rxjs": "~7.8.0",
     "three": "^0.159.0",
+    "three-text2d": "^0.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
