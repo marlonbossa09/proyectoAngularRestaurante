@@ -1,3 +1,4 @@
+import { cameraPosition } from './../../../node_modules/@types/three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements.d';
 import {
   Component,
   ElementRef,
@@ -8,8 +9,7 @@ import {
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
-
+import * as text2DModule from 'three-spritetext';
 
 @Component({
   selector: 'app-three-scene',
@@ -30,6 +30,7 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
   private mixer: THREE.AnimationMixer;
   private action: any | THREE.AnimationAction;
   private clock: THREE.Clock;
+  private SpriteText = text2DModule.default;
 
   constructor(private ngZone: NgZone) {
     this.scene = new THREE.Scene();
@@ -85,9 +86,14 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
   // Configura las limitaciones del zoom
   this.controls.maxPolarAngle = Math.PI / 2; // Evita que la cámara se voltee hacia arriba
   this.controls.minPolarAngle = Math.PI / 2; // Evita que la cámara se voltee hacia abajo
-  this.controls.minDistance = 0; // Distancia mínima de acercamiento
+  this.controls.minDistance = 0.02; // Distancia mínima de acercamiento
   this.controls.maxDistance = 1;   // Distancia máxima de alejamiento
   this.controls.enableDamping = true;
+  this.controls.dampingFactor = 0.25; // Ajusta este valor según tus necesidades
+
+// Ajusta la velocidad del zoom
+this.controls.zoomSpeed = 10.0; // Ajusta este valor según tus necesidades
+
     // Raycaster
     document
       .getElementById('three-container')!
@@ -96,22 +102,29 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
       .getElementById('three-container')!
       .addEventListener('click', this.onClickObject.bind(this));
 
-    this.loadGLB('assets/img/restaurante.glb').then((gltf2) => {
-      const estatua: any = gltf2.scene;
-      estatua.position.set(0, 0, 0);
+      this.loadGLB('assets/img/restaurante.glb').then((gltf2) => {
+        const estatua: any = gltf2.scene;
+        estatua.position.set(0, 0, 0);
 
-      // Imprime las animaciones disponibles
-      console.log(gltf2.animations);
+        // Encuentra el punto en la esfera donde deseas colocar el texto (coordenadas locales)
+        const puntoDeseado = new THREE.Vector3(0, 0, 0); // Ajusta las coordenadas según tus necesidades
 
-      this.mixer = new THREE.AnimationMixer(estatua);
-      this.clips = gltf2.animations; // Asigna las animaciones al arreglo de clips
-      if (this.clips.length > 0) {
-        this.action = this.mixer.clipAction(this.clips[0]); // Asigna la primera animación
-        this.action.play(); // Reproduce la animación
-      }
+        // Crea el texto y ajusta su posición en las coordenadas locales de la esfera
+        const texto = new this.SpriteText('Texto en la esfera');
+        texto.scale.set(1, 1, 1); // Ajusta la escala según tus necesidades
 
-      this.scene.add(estatua);
-    });
+
+        // Usa localToWorld para convertir las coordenadas locales a coordenadas mundiales
+        puntoDeseado.applyMatrix4(estatua.matrixWorld);
+        texto.position.copy(puntoDeseado);
+
+        // Agrega el texto como hijo de la esfera para que su posición sea relativa a la esfera
+        estatua.add(texto);
+
+        this.scene.add(estatua);
+      });
+
+
 
     this.loadSkyboxHDR();
   }
