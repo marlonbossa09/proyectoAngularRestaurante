@@ -31,6 +31,8 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
   private action: any | THREE.AnimationAction;
   private clock: THREE.Clock;
   private SpriteText = text2DModule.default;
+  private spriteText: any;  // Cambia el nombre de la variable para mayor claridad
+  private font: any;
 
   constructor(private ngZone: NgZone) {
     this.scene = new THREE.Scene();
@@ -45,6 +47,8 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
     this.raycaster = new THREE.Raycaster();
     this.pointer = new THREE.Vector2();
     this.intersects = [];
+    this.spriteText = text2DModule.default;
+    this.font = null;
     this.objet3d = null;
     this.clips = [];
     this.mixer = new THREE.AnimationMixer(this.objet3d || null);
@@ -52,7 +56,7 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
     this.clock = new THREE.Clock();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.init();
     this.animate();
   }
@@ -62,6 +66,7 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
       this.renderer.dispose();
     }
   }
+
 
   private init() {
     // Dentro del método init()
@@ -109,10 +114,21 @@ this.controls.zoomSpeed = 10.0; // Ajusta este valor según tus necesidades
         // Encuentra el punto en la esfera donde deseas colocar el texto (coordenadas locales)
         const puntoDeseado = new THREE.Vector3(0, 0, 0); // Ajusta las coordenadas según tus necesidades
 
-        // Crea el texto y ajusta su posición en las coordenadas locales de la esfera
-        const texto = new this.SpriteText('Texto en la esfera');
-        texto.scale.set(1, 1, 1); // Ajusta la escala según tus necesidades
+        const texto = new this.SpriteText('Texto en la esfera', 10, 'blue');
 
+// Ajusta otras propiedades según sea necesario
+texto.backgroundColor = 'rgba(255, 255, 255, 0.5)'; // Fondo semitransparente blanco
+texto.strokeWidth = 1; // Grosor del trazo
+texto.strokeColor = 'black'; // Color del trazo
+texto.fontFace = 'Arial'; // Tipo de fuente
+texto.fontSize = 90; // Resolución vertical
+texto.fontWeight = 'bold'; // Peso de la fuente en negrita
+texto.padding = 5; // Relleno
+texto.borderWidth = 2; // Grosor del borde
+texto.borderColor = 'gray'; // Color del borde
+
+        texto.scale.set(1, 1, 1); // Ajusta la escala según tus necesidades
+        texto.material.color.set('blue');
 
         // Usa localToWorld para convertir las coordenadas locales a coordenadas mundiales
         puntoDeseado.applyMatrix4(estatua.matrixWorld);
