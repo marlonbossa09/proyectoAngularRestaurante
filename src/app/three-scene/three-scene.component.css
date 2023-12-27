@@ -1,0 +1,8 @@
+#three-container {
+  position: relative;
+  width: 80vw; /* Ajusta según sea necesario */
+  height: 80vh; /* Ajusta según sea necesario */
+  overflow: hidden;
+  border-radius: 10px; /* Ajusta el radio del borde según sea necesario */
+  border: 2px solid #fff; /* Ajusta el color y grosor del borde según sea necesario */
+}

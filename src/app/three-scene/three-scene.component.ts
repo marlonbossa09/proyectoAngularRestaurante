@@ -76,7 +76,7 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
     this.camera.updateProjectionMatrix();
     window.addEventListener('resize', this.onWindowResize.bind(this));
 
-    this.renderer.setSize(window.innerWidth * 0.8, window.innerHeight);
+    this.renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.8);
 
     document
       .getElementById('three-container')!
@@ -114,21 +114,21 @@ this.controls.zoomSpeed = 10.0; // Ajusta este valor según tus necesidades
         // Encuentra el punto en la esfera donde deseas colocar el texto (coordenadas locales)
         const puntoDeseado = new THREE.Vector3(0, 0, 0); // Ajusta las coordenadas según tus necesidades
 
-        const texto = new this.SpriteText('Texto en la esfera', 10, 'blue');
+        const texto = new this.SpriteText('El espacio perfecto', 10, 'blue');
 
 // Ajusta otras propiedades según sea necesario
-texto.backgroundColor = 'rgba(255, 255, 255, 0.5)'; // Fondo semitransparente blanco
-texto.strokeWidth = 1; // Grosor del trazo
-texto.strokeColor = 'black'; // Color del trazo
+//texto.backgroundColor = 'rgba(255, 255, 255, 0.5)'; // Fondo semitransparente blanco
+texto.strokeWidth = 0.5; // Grosor del trazo
+texto.strokeColor = 'orange'; // Color del trazo
 texto.fontFace = 'Arial'; // Tipo de fuente
 texto.fontSize = 90; // Resolución vertical
 texto.fontWeight = 'bold'; // Peso de la fuente en negrita
-texto.padding = 5; // Relleno
-texto.borderWidth = 2; // Grosor del borde
-texto.borderColor = 'gray'; // Color del borde
+texto.padding = 10; // Relleno
+//texto.borderWidth = 1; // Grosor del borde
+//texto.borderColor = 'gray'; // Color del borde
 
         texto.scale.set(1, 1, 1); // Ajusta la escala según tus necesidades
-        texto.material.color.set('blue');
+        texto.material.color.set('white');
 
         // Usa localToWorld para convertir las coordenadas locales a coordenadas mundiales
         puntoDeseado.applyMatrix4(estatua.matrixWorld);
@@ -136,6 +136,32 @@ texto.borderColor = 'gray'; // Color del borde
 
         // Agrega el texto como hijo de la esfera para que su posición sea relativa a la esfera
         estatua.add(texto);
+
+        const subtitleText = new this.SpriteText('Para disfrutar tu alimento', 8, 'orange');
+
+// Ajusta otras propiedades según sea necesario
+// subtitleText.backgroundColor = 'rgba(255, 255, 255, 0.5)'; // Fondo semitransparente blanco
+subtitleText.strokeWidth = 0.5; // Grosor del trazo
+subtitleText.strokeColor = 'blue'; // Color del trazo
+subtitleText.fontFace = 'Arial'; // Tipo de fuente
+subtitleText.fontSize = 30; // Resolución vertical
+subtitleText.fontWeight = 'bold'; // Peso de la fuente en negrita
+subtitleText.padding = 20; // Relleno
+// subtitleText.borderWidth = 1; // Grosor del borde
+// subtitleText.borderColor = 'gray'; // Color del borde
+
+subtitleText.scale.set(0.5, 0.5, 0.5); // Ajusta la escala según tus necesidades
+subtitleText.material.color.set('white');
+
+// Calcula la posición del subtítulo en relación con la esfera
+const offsetFromMainText = new THREE.Vector3(0, -0.25, 0); // Ajusta el desplazamiento según tus necesidades
+const subtitlePosition = new THREE.Vector3().copy(puntoDeseado).add(offsetFromMainText);
+
+// Asigna la posición del subtítulo
+subtitleText.position.copy(subtitlePosition);
+
+// Agrega el subtítulo como hijo de la esfera para que su posición sea relativa a la esfera
+estatua.add(subtitleText);
 
         this.scene.add(estatua);
       });
@@ -179,6 +205,11 @@ texto.borderColor = 'gray'; // Color del borde
           this.mixer.update(delta);
         }
 
+        // Movimiento del objeto durante la animación
+        if (this.objet3d) {
+          this.objet3d.position.x += 0.01; // Ajusta la velocidad de movimiento según tus necesidades
+        }
+
         // Verifica si controls está definido antes de llamar a update
         if (this.controls) {
           this.controls.update();
@@ -190,6 +221,9 @@ texto.borderColor = 'gray'; // Color del borde
       animateFn();
     });
   }
+
+
+
 
   private async loadGLB(url: string): Promise<GLTF> {
     const loader = new GLTFLoader();

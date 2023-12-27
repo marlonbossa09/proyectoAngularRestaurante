@@ -20,7 +20,6 @@
   text-shadow: 2px 2px 5px blue;
   max-width: 80%; /* Establece un límite máximo de ancho */
 }
-
 #texto3D h1 {
   font-size: 4em;
   font-weight: 800;
@@ -32,9 +31,13 @@
   font-weight: bold;
 }
 
+.cont2{
+  padding-top: 20px;
+}
 
 .seccion2 {
   position: relative;
+  background-image: url('src\assets\img\fondo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -42,4 +45,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto; /* Esto centra horizontalmente la imagen */
 }
