@@ -24,6 +24,8 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
   private raycaster: THREE.Raycaster;
   private pointer: THREE.Vector2;
   private intersects: THREE.Intersection[];
+  private fontPath: string = 'assets/fonts/droid_serif_bold.typeface.json';
+
 
   private objet3d: any | THREE.Object3D;
   private clips: THREE.AnimationClip[];
@@ -68,7 +70,7 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
   }
 
 
-  private init() {
+  private async init() {
     // Dentro del método init()
     this.camera.position.set(0, 0, 0.5); // Ajusta la posición de la cámara
 
@@ -107,6 +109,8 @@ this.controls.zoomSpeed = 10.0; // Ajusta este valor según tus necesidades
       .getElementById('three-container')!
       .addEventListener('click', this.onClickObject.bind(this));
 
+      await this.loadFont();
+
       this.loadGLB('assets/img/restaurante.glb').then((gltf2) => {
         const estatua: any = gltf2.scene;
         estatua.position.set(0, 0, 0);
@@ -116,11 +120,13 @@ this.controls.zoomSpeed = 10.0; // Ajusta este valor según tus necesidades
 
         const texto = new this.SpriteText('El espacio perfecto', 10, 'blue');
 
+        texto.fontFace = this.font;
+
 // Ajusta otras propiedades según sea necesario
 //texto.backgroundColor = 'rgba(255, 255, 255, 0.5)'; // Fondo semitransparente blanco
 texto.strokeWidth = 0.5; // Grosor del trazo
 texto.strokeColor = 'orange'; // Color del trazo
-texto.fontFace = 'Arial'; // Tipo de fuente
+texto.fontFace = 'Kalam'; // Tipo de fuente
 texto.fontSize = 90; // Resolución vertical
 texto.fontWeight = 'bold'; // Peso de la fuente en negrita
 texto.padding = 10; // Relleno
@@ -170,6 +176,28 @@ estatua.add(subtitleText);
 
     this.loadSkyboxHDR();
   }
+
+  private async loadFont() {
+    return new Promise<void>((resolve, reject) => {
+      const loader = new THREE.FileLoader();
+      loader.load(
+        this.fontPath,
+        (data) => {
+          if (typeof data === 'string') {
+            this.font = JSON.parse(data);
+            resolve();
+          } else {
+            reject(new Error('Error al cargar la fuente: los datos no son de tipo string.'));
+          }
+        },
+        undefined,
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
 
   private onWindowResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;

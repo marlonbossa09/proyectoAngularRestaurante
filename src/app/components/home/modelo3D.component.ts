@@ -31,7 +31,7 @@ export class Modelo3DComponent implements OnInit, OnDestroy {
 
   private init() {
     // Configurar la cámara y el renderizador
-    this.camera.position.z = 3;
+    this.camera.position.z = 2;
     this.renderer.setSize(window.innerWidth, window.innerHeight * 0.8);
 
     const ambientLight = new AmbientLight(0xffffff, 0.5); // Luz ambiental
@@ -48,11 +48,11 @@ export class Modelo3DComponent implements OnInit, OnDestroy {
   private loadModel() {
     // Cargar y agregar el modelo 3D aquí
     const loader = new GLTFLoader();
-    loader.load('assets/img/cuy_frito.glb', (gltf) => {
+    loader.load('assets/img/pizza.glb', (gltf) => {
       this.modelo = gltf.scene;
       this.modelo.rotation.x = Math.PI / 3;
-      this.modelo.position.set(0, 1, 0);
-      this.modelo.scale.set(1, 1, 1);
+      this.modelo.position.set(0, 0.3, 0);
+      this.modelo.scale.set(3, 3, 3);
       this.scene.add(this.modelo);
     });
   }

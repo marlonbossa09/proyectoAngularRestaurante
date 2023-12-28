@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+
 .seccion1 {
   position: relative;
   background-image: url('src\assets\img\fondo.jpg');
@@ -24,6 +26,7 @@
   font-size: 4em;
   font-weight: 800;
   white-space: nowrap; /* Evita el salto de línea */
+  font-family: 'Kalam', cursive;
 }
 
 #texto3D p {
