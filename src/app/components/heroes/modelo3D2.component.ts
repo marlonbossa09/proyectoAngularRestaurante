@@ -71,8 +71,18 @@ export class Modelo3D2Component implements OnInit, OnDestroy {
 
   private animate() {
     this.ngZone.runOutsideAngular(() => {
+      let moveDirection = 1; // Dirección inicial
+
       const animateFn = () => {
         requestAnimationFrame(animateFn);
+
+        // Mueve la cámara horizontalmente en cada fotograma
+        this.camera.position.x += 1 * moveDirection; // Ajusta la velocidad según tus necesidades
+
+        // Verifica los límites y cambia la dirección si es necesario
+        if (this.camera.position.x >= 100 || this.camera.position.x <= -100) {
+          moveDirection *= -1;
+        }
 
         this.controls.update();
         this.renderer.render(this.scene, this.camera);

@@ -22,6 +22,41 @@
   color: orange;
 }
 
+.seccion4 .edit {
+  font-size: 6em;
+  margin-bottom: 30px;
+  font-weight: bold;
+  white-space: nowrap;
+  font-family: 'Kalam', cursive;
+  text-shadow: 2px 2px 5px blue;
+  color: whitesmoke;
+}
+
+.seccion4 .edit2 {
+  font-size: 3em;
+  margin-bottom: 30px;
+  font-weight: bold;
+  white-space: nowrap;
+  font-family: 'Kalam', cursive;
+  text-shadow: 2px 2px 5px blue;
+  color: whitesmoke;
+}
+
+.seccion4 h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  font-weight: bold;
+  white-space: nowrap;
+  font-family: 'Kalam', cursive;
+  text-shadow: 2px 2px 5px orangered;
+  color: whitesmoke;
+}
+.seccion4 p {
+  font-size: 1.2em;
+  font-weight: 300;
+  font-family: 'Noto Sans', sans-serif;
+  color: white;
+}
 .seccion3 p {
   font-size: 1.5em;
   font-weight: 600;
