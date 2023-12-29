@@ -1,10 +1,10 @@
 .custom-navbar {
-  background-color: orange;
+  background-color: #FFE042;
 }
 
 .custom-navbar .navbar-nav .nav-link {
-  color: blue;
-  text-shadow: 3px 3px 5px rgb(2, 2, 17);
+  color: black;
+  text-shadow: 3px 3px 5px rgb(13, 13, 219);
   font-weight: bold;
   font-size: 19px;
   transition: color 0.3s ease;

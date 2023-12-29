@@ -20,7 +20,7 @@
   color: orange;
   text-align: center;
   text-shadow: 2px 2px 5px blue;
-  max-width: 80%; /* Establece un límite máximo de ancho */
+  max-width: 80%;
 }
 #texto3D h1 {
   font-size: 4em;

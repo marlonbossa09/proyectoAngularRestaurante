@@ -11,9 +11,9 @@ import { ThreeSceneComponent } from './three-scene/three-scene.component';
 // RUTAS
 import { APP_ROUTING } from './app.routes';
 
-import { HeroesService } from './components/services/heroes.service';
 import { ThreeComponent } from './three/three.component';
 import { Modelo3DComponent } from './components/home/modelo3D.component';
+import { Modelo3D2Component } from './components/heroes/modelo3D2.component';
 // SERVICIOS
 
 @NgModule({
@@ -25,7 +25,8 @@ import { Modelo3DComponent } from './components/home/modelo3D.component';
     HeroesComponent,
     ThreeSceneComponent,
     ThreeComponent,
-    Modelo3DComponent
+    Modelo3DComponent,
+    Modelo3D2Component
   ],
   imports: [
     BrowserModule,
