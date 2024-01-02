@@ -14,6 +14,7 @@ import { APP_ROUTING } from './app.routes';
 import { ThreeComponent } from './three/three.component';
 import { Modelo3DComponent } from './components/home/modelo3D.component';
 import { Modelo3D2Component } from './components/heroes/modelo3D2.component';
+import { Modelo3D3Component } from './components/about/modelo3D3.component';
 // SERVICIOS
 
 @NgModule({
@@ -26,7 +27,8 @@ import { Modelo3D2Component } from './components/heroes/modelo3D2.component';
     ThreeSceneComponent,
     ThreeComponent,
     Modelo3DComponent,
-    Modelo3D2Component
+    Modelo3D2Component,
+    Modelo3D3Component
   ],
   imports: [
     BrowserModule,

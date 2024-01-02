@@ -28,7 +28,6 @@
   white-space: nowrap; /* Evita el salto de línea */
   font-family: 'Kalam', cursive;
 }
-
 #texto3D p {
   font-size: 24px;
   font-weight: bold;
@@ -38,17 +37,6 @@
   padding-top: 20px;
 }
 
-.seccion2 {
-  position: relative;
-  background-image: url('src\assets\img\fondo.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .imagen {
   display: flex;
   align-items: center;
