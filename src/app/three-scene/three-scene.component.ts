@@ -72,11 +72,12 @@ export class ThreeSceneComponent implements OnInit, OnDestroy {
 
   private async init() {
     // Dentro del método init()
-    this.camera.position.set(0, 0, 0.5); // Ajusta la posición de la cámara
+    this.camera.position.set(0, 0, 0.9); // Ajusta la posición de la cámara
 
     this.camera.fov = 90;
     this.camera.updateProjectionMatrix();
     window.addEventListener('resize', this.onWindowResize.bind(this));
+
 
     this.renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.8);
 

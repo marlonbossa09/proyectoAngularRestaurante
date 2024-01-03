@@ -28,7 +28,7 @@ import { Modelo3D3Component } from './components/about/modelo3D3.component';
     ThreeComponent,
     Modelo3DComponent,
     Modelo3D2Component,
-    Modelo3D3Component
+    Modelo3D3Component,
   ],
   imports: [
     BrowserModule,

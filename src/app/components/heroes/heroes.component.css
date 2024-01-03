@@ -18,7 +18,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .seccion3 h1 {
@@ -76,4 +76,50 @@
 .seccion3 p:hover {
   color: rgb(233, 210, 3);
   transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .seccion3 h1 {
+    font-size: 6em;
+  }
+
+  .seccion3 p{
+    font-size: 1.2rem;
+  }
+
+  .seccion4 .edit{
+    font-size: 3em;
+  }
+
+  .seccion4 h2 {
+    font-size: 2em;
+    margin-top: 20px;
+  }
+
+  .seccion4 .edit2{
+    font-size: 1.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .seccion3 h1 {
+    font-size: 5em;
+  }
+
+  .seccion3 p{
+    font-size: 1.3rem;
+  }
+
+  .seccion4 .edit{
+    font-size: 2.5em;
+  }
+
+  .seccion4 h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+  }
+
+  .seccion4 .edit2{
+    font-size: 1.3em;
+  }
 }

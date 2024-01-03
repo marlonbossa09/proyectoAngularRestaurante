@@ -56,7 +56,15 @@ this.controls.maxAzimuthAngle = Math.PI / 1.5;
     this.camera.position.z = 1;
     this.camera.position.x = 5;
     this.camera.position.y = 2;
-    this.renderer.setSize(window.innerWidth * 0.4, window.innerHeight * 0.7);
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 480) {
+      this.renderer.setSize(screenWidth, screenWidth * 0.75);
+    } else {
+      this.renderer.setSize(window.innerWidth * 0.4, window.innerHeight * 0.7);
+    }
+
+
 
     // Agregar el renderizador al contenedor HTML
     const contenedor = document.getElementById('three');

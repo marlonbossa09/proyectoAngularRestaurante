@@ -35,3 +35,24 @@
   font-family: 'Noto Sans', sans-serif;
   color: white;
 }
+
+.imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+
+@media (max-width: 480px) {
+  .seccion4 .edit {
+    font-size: 4.5em;
+  }
+  .seccion4 .col-sm {
+    width: 100%; /* Ajusta el ancho del contenedor para ocupar el 100% del ancho de la pantalla */
+  }
+
+  .imagen-container {
+    text-align: center; /* Centra la imagen en dispositivos más pequeños */
+  }
+}
