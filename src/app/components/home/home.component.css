@@ -11,6 +11,19 @@
   align-items: center;
   justify-content: center;
 }
+
+.seccion2{
+  position: relative;
+  background-image: url('src/assets/img/restaurante.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #texto3D {
   position: absolute;
   top: 70%;
@@ -25,21 +38,28 @@
 #texto3D h1 {
   font-size: 4em;
   font-weight: 800;
-  white-space: nowrap; /* Evita el salto de línea */
+  white-space: nowrap;
   font-family: 'Kalam', cursive;
 }
+
+.edit2 {
+  font-size: 2em;
+  font-weight: bold;
+  white-space: nowrap;
+  font-family: 'Kalam', cursive;
+  text-shadow: 2px 2px 5px blue;
+  color: white;
+  margin-top: 1em;
+}
+
 #texto3D p {
   font-size: 24px;
   font-weight: bold;
-}
-
-.cont2{
-  padding-top: 20px;
 }
 
 .imagen {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto; /* Esto centra horizontalmente la imagen */
+  margin: 0 auto;
 }
